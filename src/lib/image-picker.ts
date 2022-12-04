@@ -18,7 +18,7 @@ export const pickImage = async () => {
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     allowsEditing: false,
   });
-  if (!result.cancelled) {
-    return result.uri;
+  if (!result.canceled) {
+    return result.assets[0].uri;
   }
 };

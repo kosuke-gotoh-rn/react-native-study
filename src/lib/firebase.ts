@@ -53,3 +53,28 @@ export const addReview = async (shopId: string, review: Review) => {
     .collection("reviews")
     .add(review);
 };
+
+export const createReviewRef = async (shopId: string) => {
+  return await firebase
+    .firestore()
+    .collection("shops")
+    .doc(shopId)
+    .collection("reviews")
+    .doc();
+};
+
+export const uploadImage = async (uri: string, path: string) => {
+  // uriをblogに変換
+  const localUri = await fetch(uri);
+  const blob = await localUri.blob();
+  // storageにupload
+  const ref = firebase.storage().ref().child(path);
+  let downloadUrl = "";
+  try {
+    await ref.put(blob);
+    downloadUrl = await ref.getDownloadURL();
+  } catch (err) {
+    console.log(err);
+  }
+  return downloadUrl;
+};
