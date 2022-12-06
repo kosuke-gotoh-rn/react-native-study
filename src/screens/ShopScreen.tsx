@@ -10,6 +10,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { ShopDetail } from "../components/ShopDetail";
 import { FloatingActionButton } from "../components/FloatingActionButton";
 import { ReviewItem } from "../components/ReviewItem";
+import { ReviewsContext } from "../contexts/reviewsContext";
 
 type Props = {
   navigation: StackNavigationProp<RootStackParamList, "Shop">;
@@ -18,8 +19,7 @@ type Props = {
 
 export const ShopScreen: React.FC<Props> = ({ navigation, route }: Props) => {
   const { shop } = route.params;
-  // const { reviews, setReviews } = useContext(ReviewsContext);
-  const [reviews, setReviews] = useState([]);
+  const { reviews, setReviews } = useContext(ReviewsContext);
 
   useEffect(() => {
     navigation.setOptions({ title: shop.name });
